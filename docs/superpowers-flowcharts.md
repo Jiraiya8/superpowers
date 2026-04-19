@@ -19,8 +19,8 @@
 - [15. Dispatching Parallel Agents 流程](#15-dispatching-parallel-agents-流程) - 并行分派独立任务
 - [16. 技能类型分类](#16-技能类型分类) - 测试类、调试类、协作类、元类
 - [17. 平台适配映射](#17-平台适配映射) - Claude Code、OpenCode、Copilot、Gemini 工具映射
-- [18. 用户指令优先级](#18-用户指令优先级) - 用户指令 > 报能 > 默认提示
-- [19. 报能执行中的红旗信号](#19-报能执行中的红旗信号) - using-superpowers、TDD、调试、验证红旗
+- [18. 用户指令优先级](#18-用户指令优先级) - 用户指令 > 技能 > 默认提示
+- [19. 技能执行中的红旗信号](#19-技能执行中的红旗信号) - using-superpowers、TDD、调试、验证红旗
 - [20. 完整会话生命周期](#20-完整会话生命周期) - 从会话开始到结束的全流程
 - [关键概念总结](#关键概念总结) - 各核心组件用途对照表
 
@@ -79,27 +79,27 @@ graph TB
     FollowSkill --> Brainstorm{"需要创意工作?"}
     
     Brainstorm -->|"是"| BrainstormingSkill["brainstorming 技能"]
-    Brainstorm -->|"否,有规格"| GitWorktrees["using-git-worktrees 报能"]
+    Brainstorm -->|"否,有规格"| GitWorktrees["using-git-worktrees 技能"]
     
     BrainstormingSkill --> DesignApproved{"设计已批准?"}
     DesignApproved -->|"否"| ReviseDesign["修订设计"]
     ReviseDesign --> BrainstormingSkill
     
     DesignApproved -->|"是"| GitWorktrees
-    GitWorktrees --> WritingPlans["writing-plans 报能"]
+    GitWorktrees --> WritingPlans["writing-plans 技能"]
     
     WritingPlans --> ChooseExecution{"选择执行方式?"}
     ChooseExecution -->|"子代理驱动 (推荐)"| SubagentDriven["subagent-driven-development"]
-    ChooseExecution -->|"内联执行"| ExecutingPlans["executing-plans 报能"]
+    ChooseExecution -->|"内联执行"| ExecutingPlans["executing-plans 技能"]
     
-    SubagentDriven --> TDD["test-driven-development 报能"]
+    SubagentDriven --> TDD["test-driven-development 技能"]
     ExecutingPlans --> TDD
     
-    TDD --> RequestReview["requesting-code-review 报能"]
+    TDD --> RequestReview["requesting-code-review 技能"]
     RequestReview --> MoreTasks{"更多任务?"}
     
     MoreTasks -->|"是"| SubagentDriven
-    MoreTasks -->|"否"| FinishingBranch["finishing-a-development-branch 报能"]
+    MoreTasks -->|"否"| FinishingBranch["finishing-a-development-branch 技能"]
     
     FinishingBranch --> End["完成"]
 ```
@@ -113,7 +113,7 @@ graph TB
     PlanModeCheck -->|"是"| BrainstormedCheck{"已经头脑风暴?"}
     PlanModeCheck -->|"否"| MightApply{"可能有任何技能适用?"}
     
-    BrainstormedCheck -->|"否"| InvokeBrainstorm["调用 brainstorming 报能"]
+    BrainstormedCheck -->|"否"| InvokeBrainstorm["调用 brainstorming 技能"]
     BrainstormedCheck -->|"是"| MightApply
     
     InvokeBrainstorm --> MightApply
@@ -154,7 +154,7 @@ graph TB
     SpecSelfReview --> UserReviewSpec{"用户审查规格?"}
     
     UserReviewSpec -->|"请求修改"| WriteDesignDoc
-    UserReviewSpec -->|"批准"| InvokeWritingPlans["调用 writing-plans 报能"]
+    UserReviewSpec -->|"批准"| InvokeWritingPlans["调用 writing-plans 技能"]
     
     InvokeWritingPlans --> End["进入计划阶段"]
 ```
@@ -196,7 +196,7 @@ graph TB
 
 ```mermaid
 graph TB
-    Announce["声明使用 writing-plans 报能"] --> ScopeCheck["检查规格范围"]
+    Announce["声明使用 writing-plans 技能"] --> ScopeCheck["检查规格范围"]
     
     ScopeCheck --> TooLarge{"跨多个独立子系统?"}
     TooLarge -->|"是"| SuggestSplit["建议分解为多个计划"]
@@ -646,16 +646,16 @@ graph TB
 graph TB
     subgraph Priority["优先级顺序"]
         P1["用户明确指令 (最高)\nCLAUDE.md / GEMINI.md / AGENTS.md / 直接请求"]
-        P2["Superpowers 报能 (中等)\n覆盖默认系统行为"]
+        P2["Superpowers 技能 (中等)\n覆盖默认系统行为"]
         P3["默认系统提示 (最低)"]
     end
     
     P1 --> P2 --> P3
     
-    Example["示例: CLAUDE.md 说 '不使用 TDD'\n但 TDD 报能说 '总是使用 TDD'\n→ 遵循用户指令"]
+    Example["示例: CLAUDE.md 说 '不使用 TDD'\n但 TDD 技能说 '总是使用 TDD'\n→ 遵循用户指令"]
 ```
 
-## 19. 报能执行中的红旗信号
+## 19. 技能执行中的红旗信号
 
 ```mermaid
 graph TB
@@ -663,9 +663,9 @@ graph TB
         US1["'这只是简单问题'"]
         US2["'需要更多上下文'"]
         US3["'先探索代码库'"]
-        US4["'不需要正式报能'"]
-        US5["'我记得这个报能'"]
-        US6["'报能太过度了'"]
+        US4["'不需要正式技能'"]
+        US5["'我记得这个技能'"]
+        US6["'技能太过度了'"]
     end
     
     subgraph TDD["TDD 红旗"]
@@ -692,7 +692,7 @@ graph TB
         VER4["依赖部分验证"]
     end
     
-    US1 --> STOP_US["停止 → 调用报能"]
+    US1 --> STOP_US["停止 → 调用技能"]
     US2 --> STOP_US
     US3 --> STOP_US
     US4 --> STOP_US
@@ -726,7 +726,7 @@ graph TB
     
     LoadAgents --> UserInput["用户输入"]
     
-    UserInput --> SkillEvaluation["报能评估"]
+    UserInput --> SkillEvaluation["技能评估"]
     
     SkillEvaluation --> CreativeWork{"创意工作?"}
     CreativeWork -->|"是"| BrainstormFlow["Brainstorming 流程"]

@@ -1,10 +1,10 @@
-# Git Worktree 与 using-git-worktrees 报能详解
+# Git Worktree 与 using-git-worktrees 技能详解
 
 ## 目录
 
 - [什么是 Git Worktree](#什么是-git-worktree)
 - [Git Worktree 核心命令](#git-worktree-核心命令)
-- [using-git-worktrees 报能详解](#using-git-worktrees-报能详解)
+- [using-git-worktrees 技能详解](#using-git-worktrees-技能详解)
 - [完整流程图](#完整流程图)
 - [目录选择优先级](#目录选择优先级)
 - [安全验证机制](#安全验证机制)
@@ -207,9 +207,9 @@ cd ../..
 
 ---
 
-## using-git-worktrees 报能详解
+## using-git-worktrees 技能详解
 
-### 报能触发时机
+### 技能触发时机
 
 ```mermaid
 graph TB
@@ -229,11 +229,11 @@ graph TB
 - 必须创建独立 worktree 后才能开始编码
 - 这是 Superpowers 的硬性规定
 
-### 报能完整流程
+### 技能完整流程
 
 ```mermaid
 graph TB
-    Announce["声明使用报能"] --> Phase1["阶段1: 目录选择"]
+    Announce["声明使用技能"] --> Phase1["阶段1: 目录选择"]
     
     subgraph Phase1["阶段1: 目录选择"]
         CheckExisting["检查现有目录"] --> Found{"找到?"}
@@ -300,7 +300,7 @@ graph TB
         Proceed -->|"否"| Investigate["调查失败原因"]
     end
     
-    Phase4 --> Complete["报能完成"]
+    Phase4 --> Complete["技能完成"]
 ```
 
 ---
@@ -698,7 +698,7 @@ graph TB
 ### 正确做法清单
 
 ```
-✅ 声明使用报能
+✅ 声明使用技能
 ✅ 检查现有目录（.worktrees > worktrees）
 ✅ 检查 CLAUDE.md 配置
 ✅ 询问用户（如果无配置）
@@ -939,7 +939,7 @@ git worktree remove .worktrees/<name>
 git worktree prune
 ```
 
-### 报能调用关系
+### 技能调用关系
 
 ```
 brainstorming (设计批准)
