@@ -15,19 +15,19 @@ description: 在当前会话中执行带有独立任务的实施计划时使用
 
 ```dot
 digraph when_to_use {
-    "Have implementation plan?" [shape=diamond];
-    "Tasks mostly independent?" [shape=diamond];
-    "Stay in this session?" [shape=diamond];
+    "有实施计划？" [shape=diamond];
+    "任务大多独立？" [shape=diamond];
+    "留在当前会话？" [shape=diamond];
     "subagent-driven-development" [shape=box];
     "executing-plans" [shape=box];
-    "Manual execution or brainstorm first" [shape=box];
+    "手动执行或先头脑风暴" [shape=box];
 
-    "Have implementation plan?" -> "Tasks mostly independent?" [label="yes"];
-    "Have implementation plan?" -> "Manual execution or brainstorm first" [label="no"];
-    "Tasks mostly independent?" -> "Stay in this session?" [label="yes"];
-    "Tasks mostly independent?" -> "Manual execution or brainstorm first" [label="no - tightly coupled"];
-    "Stay in this session?" -> "subagent-driven-development" [label="yes"];
-    "Stay in this session?" -> "executing-plans" [label="no - parallel session"];
+    "有实施计划？" -> "任务大多独立？" [label="是"];
+    "有实施计划？" -> "手动执行或先头脑风暴" [label="否"];
+    "任务大多独立？" -> "留在当前会话？" [label="是"];
+    "任务大多独立？" -> "手动执行或先头脑风暴" [label="否 - 紧密耦合"];
+    "留在当前会话？" -> "subagent-driven-development" [label="是"];
+    "留在当前会话？" -> "executing-plans" [label="否 - 并行会话"];
 }
 ```
 
@@ -44,43 +44,43 @@ digraph process {
     rankdir=TB;
 
     subgraph cluster_per_task {
-        label="Per Task";
-        "Dispatch implementer subagent (./implementer-prompt.md)" [shape=box];
-        "Implementer subagent asks questions?" [shape=diamond];
-        "Answer questions, provide context" [shape=box];
-        "Implementer subagent implements, tests, commits, self-reviews" [shape=box];
-        "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" [shape=box];
-        "Spec reviewer subagent confirms code matches spec?" [shape=diamond];
-        "Implementer subagent fixes spec gaps" [shape=box];
-        "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" [shape=box];
-        "Code quality reviewer subagent approves?" [shape=diamond];
-        "Implementer subagent fixes quality issues" [shape=box];
-        "Mark task complete in TodoWrite" [shape=box];
+        label="每个任务";
+        "派发实现者子代理 (./implementer-prompt.md)" [shape=box];
+        "实现者子代理有疑问？" [shape=diamond];
+        "回答问题，提供上下文" [shape=box];
+        "实现者子代理实现、测试、提交、自检" [shape=box];
+        "派发规范审查者子代理 (./spec-reviewer-prompt.md)" [shape=box];
+        "规范审查者子代理确认代码匹配规范？" [shape=diamond];
+        "实现者子代理修复规范差距" [shape=box];
+        "派发代码质量审查者子代理 (./code-quality-reviewer-prompt.md)" [shape=box];
+        "代码质量审查者子代理批准？" [shape=diamond];
+        "实现者子代理修复质量问题" [shape=box];
+        "在 TodoWrite 中标记任务完成" [shape=box];
     }
 
-    "Read plan, extract all tasks with full text, note context, create TodoWrite" [shape=box];
-    "More tasks remain?" [shape=diamond];
-    "Dispatch final code reviewer subagent for entire implementation" [shape=box];
-    "Use superpowers:finishing-a-development-branch" [shape=box style=filled fillcolor=lightgreen];
+    "读取计划，提取所有任务全文，记录上下文，创建 TodoWrite" [shape=box];
+    "还有更多任务？" [shape=diamond];
+    "派发最终代码审查者子代理审查整个实现" [shape=box];
+    "使用 superpowers:finishing-a-development-branch" [shape=box style=filled fillcolor=lightgreen];
 
-    "Read plan, extract all tasks with full text, note context, create TodoWrite" -> "Dispatch implementer subagent (./implementer-prompt.md)";
-    "Dispatch implementer subagent (./implementer-prompt.md)" -> "Implementer subagent asks questions?";
-    "Implementer subagent asks questions?" -> "Answer questions, provide context" [label="yes"];
-    "Answer questions, provide context" -> "Dispatch implementer subagent (./implementer-prompt.md)";
-    "Implementer subagent asks questions?" -> "Implementer subagent implements, tests, commits, self-reviews" [label="no"];
-    "Implementer subagent implements, tests, commits, self-reviews" -> "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)";
-    "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" -> "Spec reviewer subagent confirms code matches spec?";
-    "Spec reviewer subagent confirms code matches spec?" -> "Implementer subagent fixes spec gaps" [label="no"];
-    "Implementer subagent fixes spec gaps" -> "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" [label="re-review"];
-    "Spec reviewer subagent confirms code matches spec?" -> "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" [label="yes"];
-    "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" -> "Code quality reviewer subagent approves?";
-    "Code quality reviewer subagent approves?" -> "Implementer subagent fixes quality issues" [label="no"];
-    "Implementer subagent fixes quality issues" -> "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" [label="re-review"];
-    "Code quality reviewer subagent approves?" -> "Mark task complete in TodoWrite" [label="yes"];
-    "Mark task complete in TodoWrite" -> "More tasks remain?";
-    "More tasks remain?" -> "Dispatch implementer subagent (./implementer-prompt.md)" [label="yes"];
-    "More tasks remain?" -> "Dispatch final code reviewer subagent for entire implementation" [label="no"];
-    "Dispatch final code reviewer subagent for entire implementation" -> "Use superpowers:finishing-a-development-branch";
+    "读取计划，提取所有任务全文，记录上下文，创建 TodoWrite" -> "派发实现者子代理 (./implementer-prompt.md)";
+    "派发实现者子代理 (./implementer-prompt.md)" -> "实现者子代理有疑问？";
+    "实现者子代理有疑问？" -> "回答问题，提供上下文" [label="是"];
+    "回答问题，提供上下文" -> "派发实现者子代理 (./implementer-prompt.md)";
+    "实现者子代理有疑问？" -> "实现者子代理实现、测试、提交、自检" [label="否"];
+    "实现者子代理实现、测试、提交、自检" -> "派发规范审查者子代理 (./spec-reviewer-prompt.md)";
+    "派发规范审查者子代理 (./spec-reviewer-prompt.md)" -> "规范审查者子代理确认代码匹配规范？";
+    "规范审查者子代理确认代码匹配规范？" -> "实现者子代理修复规范差距" [label="否"];
+    "实现者子代理修复规范差距" -> "派发规范审查者子代理 (./spec-reviewer-prompt.md)" [label="重新审查"];
+    "规范审查者子代理确认代码匹配规范？" -> "派发代码质量审查者子代理 (./code-quality-reviewer-prompt.md)" [label="是"];
+    "派发代码质量审查者子代理 (./code-quality-reviewer-prompt.md)" -> "代码质量审查者子代理批准？";
+    "代码质量审查者子代理批准？" -> "实现者子代理修复质量问题" [label="否"];
+    "实现者子代理修复质量问题" -> "派发代码质量审查者子代理 (./code-quality-reviewer-prompt.md)" [label="重新审查"];
+    "代码质量审查者子代理批准？" -> "在 TodoWrite 中标记任务完成" [label="是"];
+    "在 TodoWrite 中标记任务完成" -> "还有更多任务？";
+    "还有更多任务？" -> "派发实现者子代理 (./implementer-prompt.md)" [label="是"];
+    "还有更多任务？" -> "派发最终代码审查者子代理审查整个实现" [label="否"];
+    "派发最终代码审查者子代理审查整个实现" -> "使用 superpowers:finishing-a-development-branch";
 }
 ```
 
