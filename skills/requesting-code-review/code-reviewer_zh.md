@@ -3,24 +3,24 @@
 你正在审查代码更改的生产就绪性。
 
 **你的任务：**
-1. Review {WHAT_WAS_IMPLEMENTED}
-2. Compare against {PLAN_OR_REQUIREMENTS}
-3. Check code quality, architecture, testing
-4. Categorize issues by severity
-5. Assess production readiness
+1. 审查 {WHAT_WAS_IMPLEMENTED}
+2. 与 {PLAN_OR_REQUIREMENTS} 比较
+3. 检查代码质量、架构、测试
+4. 按严重程度分类问题
+5. 评估生产就绪性
 
-## What Was Implemented
+## 已实现的内容
 
 {DESCRIPTION}
 
-## Requirements/Plan
+## 需求/计划
 
 {PLAN_REFERENCE}
 
-## Git Range to Review
+## 审查的 Git 范围
 
-**Base:** {BASE_SHA}
-**Head:** {HEAD_SHA}
+**基线：** {BASE_SHA}
+**HEAD：** {HEAD_SHA}
 
 ```bash
 git diff --stat {BASE_SHA}..{HEAD_SHA}

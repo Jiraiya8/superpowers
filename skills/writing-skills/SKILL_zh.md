@@ -113,26 +113,26 @@ description: [特定触发条件和症状]时使用
 ## Overview
 这是什么？核心原则在 1-2 句话中。
 
-## When to Use
+## When to Use（何时使用）
 [如果决策不明显，则小型内联流程图]
 
 带症状和用例的要点列表
 何时不要使用
 
-## Core Pattern (for techniques/patterns)
+## Core Pattern (for techniques/patterns)（核心模式）
 前后代码对比
 
-## Quick Reference
+## Quick Reference（快速参考）
 扫描常见操作的表格或要点
 
-## Implementation
+## Implementation（实现）
 简单模式的内联代码
 链接到文件用于重量级参考或可复用工具
 
-## Common Mistakes
+## Common Mistakes（常见错误）
 什么出错 + 修复方法
 
-## Real-World Impact (optional)
+## Real-World Impact (optional)（真实影响，可选）
 具体结果
 ```
 
