@@ -1,5 +1,31 @@
 # Superpowers 流程图详解
 
+## 目录大纲
+
+- [1. Superpowers 整体架构](#1-superpowers-整体架构) - 核心层、技能库、平台适配层架构
+- [2. 主开发工作流](#2-主开发工作流) - 从用户发起任务到完成的完整流程
+- [3. 技能调用流程](#3-技能调用流程) - 技能判断与调用的决策流程
+- [4. Brainstorming 技能流程](#4-brainstorming-技能流程) - 苏格拉底式设计精炼流程
+- [5. Git Worktrees 技能流程](#5-git-worktrees-技能流程) - 隔离工作空间设置
+- [6. Writing Plans 技能流程](#6-writing-plans-技能流程) - 详细实现计划编写
+- [7. Subagent-driven Development 技能流程](#7-subagent-driven-development-技能流程) - 两级审查执行流程
+- [8. TDD 循环](#8-tdd-test-driven-development-循环) - RED-GREEN-REFACTOR 核心循环
+- [9. TDD 验证流程详情](#9-tdd-验证流程详情) - TDD 详细验证步骤
+- [10. Systematic Debugging 四阶段流程](#10-systematic-debugging-四阶段流程) - 根因调查、模式分析、假设测试、实现
+- [11. Verification Before Completion 流程](#11-verification-before-completion-流程) - 声明前必须有证据
+- [12. Code Review 流程](#12-code-review-流程) - 请求审查与接收审查
+- [13. Finishing Development Branch 流程](#13-finishing-development-branch-流程) - 合并/PR/保留/丢弃选项
+- [14. Writing Skills 流程](#14-writing-skills-流程) - RED-GREEN-REFACTOR 创建技能
+- [15. Dispatching Parallel Agents 流程](#15-dispatching-parallel-agents-流程) - 并行分派独立任务
+- [16. 技能类型分类](#16-技能类型分类) - 测试类、调试类、协作类、元类
+- [17. 平台适配映射](#17-平台适配映射) - Claude Code、OpenCode、Copilot、Gemini 工具映射
+- [18. 用户指令优先级](#18-用户指令优先级) - 用户指令 > 报能 > 默认提示
+- [19. 报能执行中的红旗信号](#19-报能执行中的红旗信号) - using-superpowers、TDD、调试、验证红旗
+- [20. 完整会话生命周期](#20-完整会话生命周期) - 从会话开始到结束的全流程
+- [关键概念总结](#关键概念总结) - 各核心组件用途对照表
+
+---
+
 ## 1. Superpowers 整体架构
 
 ```mermaid
