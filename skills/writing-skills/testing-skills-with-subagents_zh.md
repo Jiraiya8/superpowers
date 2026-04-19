@@ -219,7 +219,7 @@ Write code before test? Delete it. Start over.
 ### 4. 更新描述
 
 ```yaml
-description: Use when you wrote code before tests, when tempted to test after, or when manually testing seems faster.
+description: 先写代码后写测试时使用，或想先测试后再写代码时，或手动测试看起来更快时使用。
 ```
 
 添加即将违规的症状。

@@ -1,11 +1,11 @@
 ***
 
 name: using-superpowers
-description: Use when starting any conversation - establishes how to find and use skills, requiring Skill tool invocation before ANY response including clarifying questions
+description: 开始任何对话时使用 — 建立如何查找和使用技能，要求在任何响应（包括澄清问题）前调用 Skill 工具
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 <SUBAGENT-STOP>
-If you were dispatched as a subagent to execute a specific task, skip this skill.
+如果你被派发为子代理执行特定任务，跳过此技能。
 </SUBAGENT-STOP>
 
 <EXTREMELY-IMPORTANT>

@@ -24,17 +24,17 @@
 - [ ] **Step 1:** 创建审查者 prompt 模板文件
 
 ```markdown
-# Spec Document Reviewer Prompt Template
+# 规格文档审查者提示模板
 
-Use this template when dispatching a spec document reviewer subagent。
+在派发规格文档审查者子代理时使用此模板。
 
-**Purpose:** Verify the spec is complete，consistent，and ready for implementation planning。
+**目的：** 验证规格完整、一致且准备好进行实现规划。
 
-**Dispatch after:** Spec document is written to docs/superpowers/specs/
+**派发时机：** 规格文档已写入 docs/superpowers/specs/
 
 ```
 Task tool（general-purpose）:
-  description: "Review spec document"
+  description: "审查规格文档"
   prompt: |
     你是一个规格文档审查者。验证此规格完整且准备好进行规划。
 
@@ -63,14 +63,14 @@ Task tool（general-purpose）:
 
     **状态：** ✅ 已批准 | ❌ 发现问题
 
-    **Issues（if any）:**
-    - [Section X]: [specific issue] - [why it matters]
+    **问题（如有）：**
+    - [章节 X]: [具体问题] - [为什么重要]
 
-    **Recommendations（advisory）:**
-    - [suggestions that don't block approval]
+    **建议（仅供参考）：**
+    - [不阻止批准的建议]
 ```
 
-**Reviewer returns:** Status，Issues（if any），Recommendations
+**审查者返回：** 状态、问题（如有）、建议
 ```
 
 - [ ] **Step 2:** 验证文件创建正确
@@ -101,19 +101,19 @@ git commit -m "feat: add spec document reviewer prompt template"
 找到 "After the Design" 部分，在 documentation 后、implementation 前添加新的 "Spec Review Loop" 部分：
 
 ```markdown
-**Spec Review Loop:**
-After writing the spec document:
-1. Dispatch spec-document-reviewer subagent（see spec-document-reviewer-prompt.md）
-2. If ❌ Issues Found:
-   - Fix the issues in the spec document
-   - Re-dispatch reviewer
-   - Repeat until ✅ Approved
-3. If ✅ Approved: proceed to implementation setup
+**规格审查循环：**
+编写规格文档后：
+1. 派发 spec-document-reviewer 子代理（见 spec-document-reviewer-prompt.md）
+2. 如果 ❌ 发现问题：
+   - 在规格文档中修复问题
+   - 重新派发审查者
+   - 重复直到 ✅ 已批准
+3. 如果 ✅ 已批准：继续到实现设置
 
-**Review loop guidance:**
-- Same agent that wrote the spec fixes it（preserves context）
-- If loop exceeds 5 iterations，surface to human for guidance
-- Reviewers are advisory - explain disagreements if you believe feedback is incorrect
+**审查循环指导：**
+- 编写规格的同一代理修复它（保留上下文）
+- 如果循环超过 5 次，向用户请求指导
+- 审查者仅供参考 — 如果你认为反馈错误，解释你的不同意见
 ```
 
 - [ ] **Step 3:** 验证变更
@@ -142,17 +142,17 @@ git commit -m "feat: add spec review loop to brainstorming skill"
 - [ ] **Step 1:** 创建审查者 prompt 模板文件
 
 ```markdown
-# Plan Document Reviewer Prompt Template
+# 计划文档审查者提示模板
 
-Use this template when dispatching a plan document reviewer subagent。
+在派发计划文档审查者子代理时使用此模板。
 
-**Purpose:** Verify the plan chunk is complete，matches the spec，and has proper task decomposition。
+**目的：** 验证计划块完整、匹配规格、并有合理的任务分解。
 
-**Dispatch after:** Each plan chunk is written
+**派发时机：** 每个计划块编写完成后
 
 ```
 Task tool（general-purpose）:
-  description: "Review plan chunk N"
+  description: "审查计划块 N"
   prompt: |
     你是一个计划文档审查者。验证此计划块完整且准备好进行实现。
 
@@ -221,19 +221,19 @@ git commit -m "feat: add plan document reviewer prompt template"
 在 "Execution Handoff" 部分前添加：
 
 ```markdown
-## Plan Review Loop
+## 计划审查循环
 
-After completing each chunk of the plan:
+完成计划的每个块后：
 
-1. Dispatch plan-document-reviewer subagent for the current chunk
-   - Provide: chunk content，path to spec document
-2. If ❌ Issues Found:
-   - Fix the issues in the chunk
-   - Re-dispatch reviewer for that chunk
-   - Repeat until ✅ Approved
-3. If ✅ Approved: proceed to next chunk（or execution handoff if last chunk）
+1. 为当前块派发 plan-document-reviewer 子代理
+   - 提供：块内容、规格文档路径
+2. 如果 ❌ 发现问题：
+   - 在块中修复问题
+   - 为该块重新派发审查者
+   - 重复直到 ✅ 已批准
+3. 如果 ✅ 已批准：继续到下一块（或如果是最后一块，继续到执行移交）
 
-**Chunk boundaries:** Use `## Chunk N: <name>` headings to delimit chunks。Each chunk should be ≤1000 lines and logically self-contained。
+**块边界：** 使用 `## Chunk N: <名称>` 标题分隔块。每块应 ≤1000 行且逻辑上自包含。
 ```
 
 - [ ] **Step 3:** 更新任务语法示例使用 checkbox

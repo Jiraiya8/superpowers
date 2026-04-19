@@ -63,7 +63,7 @@ module.exports = {
 ```yaml
 ---
 name: skill-name
-description: Use when [condition] - [what it does]; [additional context]
+description: [条件]时使用 — [它做什么]; [额外上下文]
 ---
 ```
 
@@ -78,9 +78,9 @@ description: Use when [condition] - [what it does]; [additional context]
 ```javascript
 {
   name: 'use_skill',
-  description: 'Load and read a specific skill to guide your work',
+  description: '加载并读取特定技能以指导你的工作',
   schema: z.object({
-    skill_name: z.string().describe('Name of skill（e.g.，"superpowers:brainstorming")')
+    skill_name: z.string().describe('技能名称（例如 "superpowers:brainstorming")')
   }),
   execute: async ({ skill_name }) => {
     const { skillPath，content，frontmatter } = resolveAndReadSkill(skill_name);
@@ -103,7 +103,7 @@ ${content}`;
 ```javascript
 {
   name: 'find_skills',
-  description: 'List all available skills',
+  description: '列出所有可用技能',
   schema: z.object({}),
   execute: async () => {
     const skills = discoverAllSkills();
@@ -174,7 +174,7 @@ export const SuperpowersPlugin = async ({ client，directory，$ }) => {
     tools: [
       {
         name: 'use_skill',
-        description: 'Load and read a specific skill',
+        description: '加载并读取特定技能',
         schema: z.object({
           skill_name: z.string()
         }),
@@ -184,7 +184,7 @@ export const SuperpowersPlugin = async ({ client，directory，$ }) => {
       },
       {
         name: 'find_skills',
-        description: 'List all available skills',
+        description: '列出所有可用技能',
         schema: z.object({}),
         execute: async () => {
           // Implementation using skillsCore

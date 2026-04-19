@@ -31,7 +31,7 @@ const path = require('path');
  * Current format:
  * ---
  * name: skill-name
- * description: Use when [condition] - [what it does]
+ * description: [条件]时使用 — [它做什么]
  * ---
  *
  * @param {string} filePath - Path to SKILL.md file
@@ -514,9 +514,9 @@ export const SuperpowersPlugin = async ({ project，client，$，directory，wor
     tools: [
       {
         name: 'use_skill',
-        description: 'Load and read a specific skill to guide your work。Skills contain proven workflows，mandatory processes，and expert techniques。',
+        description: '加载并读取特定技能以指导你的工作。技能包含经过验证的工作流、强制流程和专家技术。',
         schema: z.object({
-          skill_name: z.string().describe('Name of the skill to load（e.g.，"superpowers:brainstorming" or "my-custom-skill")')
+          skill_name: z.string().describe('要加载的技能名称（例如 "superpowers:brainstorming" 或 "my-custom-skill")')
         }),
         execute: async ({ skill_name }) => {
           // Resolve skill path（handles shadowing: personal > superpowers）
@@ -598,7 +598,7 @@ git commit -m "feat: implement use_skill tool for opencode"
 ```javascript
       {
         name: 'find_skills',
-        description: 'List all available skills in the superpowers and personal skill libraries。',
+        description: '列出 superpowers 和个人技能库中的所有可用技能。',
         schema: z.object({}),
         execute: async () => {
           // Find skills in both directories
@@ -837,7 +837,7 @@ Create `~/.config/opencode/skills/my-skill/SKILL.md`:
 ```markdown
 ---
 name: my-skill
-description: Use when [condition] - [what it does]
+description: [条件]时使用 — [它做什么]
 ---
 
 # My Skill

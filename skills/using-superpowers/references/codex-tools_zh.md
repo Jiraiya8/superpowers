@@ -24,19 +24,18 @@ multi_agent = true
 
 这会启用 `spawn_agent`、`wait` 和 `close_agent`，用于技能如 `dispatching-parallel-agents` 和 `subagent-driven-development`。
 
-## Named agent dispatch
+## 命名代理分发
 
-Claude Code skills reference named agent types like `superpowers:code-reviewer`.
-Codex does not have a named agent registry — `spawn_agent` creates generic agents
-from built-in roles (`default`, `explorer`, `worker`).
+Claude Code 技能引用命名代理类型如 `superpowers:code-reviewer`。
+Codex 没有命名代理注册表 — `spawn_agent` 从内置角色（`default`、`explorer`、`worker`）创建通用代理。
 
 当技能说要分发命名代理类型时：
 
-1. Find the agent's prompt file (e.g., `agents/code-reviewer.md` or the skill's
-   local prompt template like `code-quality-reviewer-prompt.md`)
-2. Read the prompt content
-3. Fill any template placeholders (`{BASE_SHA}`, `{WHAT_WAS_IMPLEMENTED}`, etc.)
-4. Spawn a `worker` agent with the filled content as the `message`
+1. 找到代理的提示文件（例如 `agents/code-reviewer.md` 或技能的
+   本地提示模板如 `code-quality-reviewer-prompt.md`）
+2. 读取提示内容
+3. 填充任何模板占位符（`{BASE_SHA}`、`{WHAT_WAS_IMPLEMENTED}` 等）
+4. 用填充的内容作为 `message` 生成一个 `worker` 代理
 
 | Skill instruction | Codex equivalent |
 |-------------------|------------------|
@@ -75,20 +74,18 @@ GIT_COMMON=$(cd "$(git rev-parse --git-common-dir)" 2>/dev/null && pwd -P)
 BRANCH=$(git branch --show-current)
 ```
 
-- `GIT_DIR != GIT_COMMON` → already in a linked worktree (skip creation)
-- `BRANCH` empty → detached HEAD (cannot branch/push/PR from sandbox)
+- `GIT_DIR != GIT_COMMON` → 已在链接的 worktree 中（跳过创建）
+- `BRANCH` 空 → 分离 HEAD（无法从沙箱分支/推送/创建 PR）
 
-See `using-git-worktrees` Step 0 and `finishing-a-development-branch`
-Step 1 for how each skill uses these signals.
+参见 `using-git-worktrees` Step 0 和 `finishing-a-development-branch`
+Step 1 了解每个技能如何使用这些信号。
 
-## Codex App Finishing
+## Codex App 完成
 
-When the sandbox blocks branch/push operations (detached HEAD in an
-externally managed worktree), the agent commits all work and informs
-the user to use the App's native controls:
+当沙箱阻止分支/推送操作（在外部管理的 worktree 中的分离 HEAD）时，
+代理提交所有工作并通知用户使用 App 的原生控件：
 
-- **"Create branch"** — names the branch, then commit/push/PR via App UI
-- **"Hand off to local"** — transfers work to the user's local checkout
+- **"创建分支"** — 命名分支，然后通过 App UI 提交/推送/创建 PR
+- **"移交到本地"** — 将工作转移到用户的本地检出
 
-The agent can still run tests, stage files, and output suggested branch
-names, commit messages, and PR descriptions for the user to copy.
+代理仍可运行测试、暂存文件，并输出建议的分支名、提交消息和 PR 描述供用户复制。

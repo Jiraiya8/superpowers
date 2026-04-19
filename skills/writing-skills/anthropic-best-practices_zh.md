@@ -203,33 +203,33 @@ Do not modify the command or add additional flags.
 **PDF Processing skill：**
 
 ```yaml  theme={null}
-description: Extract text and tables from PDF files, fill forms, merge documents. Use when working with PDF files or when the user mentions PDFs, forms, or document extraction.
+description: 从 PDF 文件提取文本和表格，填写表单，合并文档。处理 PDF 文件或用户提及 PDF、表单或文档提取时使用。
 ```
 
 **Excel Analysis skill：**
 
 ```yaml  theme={null}
-description: Analyze Excel spreadsheets, create pivot tables, generate charts. Use when analyzing Excel files, spreadsheets, tabular data, or .xlsx files.
+description: 分析 Excel 电子表格，创建数据透视表，生成图表。分析 Excel 文件、电子表格、表格数据或 .xlsx 文件时使用。
 ```
 
 **Git Commit Helper skill：**
 
 ```yaml  theme={null}
-description: Generate descriptive commit messages by analyzing git diffs. Use when the user asks for help writing commit messages or reviewing staged changes.
+description: 通过分析 git diffs 生成描述性提交消息。用户请求帮助编写提交消息或审查暂存更改时使用。
 ```
 
 避免像这些模糊的描述：
 
 ```yaml  theme={null}
-description: Helps with documents
+description: 帮助处理文档
 ```
 
 ```yaml  theme={null}
-description: Processes data
+description: 处理数据
 ```
 
 ```yaml  theme={null}
-description: Does stuff with files
+description: 处理文件
 ```
 
 ### 渐进披露模式
@@ -271,7 +271,7 @@ pdf/
 `````markdown  theme={null}
 ---
 name: PDF Processing
-description: Extracts text and tables from PDF files, fills forms, and merges documents. Use when working with PDF files or when the user mentions PDFs, forms, or document extraction.
+description: 从 PDF 文件提取文本和表格，填写表单，合并文档。处理 PDF 文件或用户提及 PDF、表单或文档提取时使用。
 ---
 
 # PDF Processing

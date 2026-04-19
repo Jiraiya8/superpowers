@@ -1,6 +1,6 @@
 ---
 name: writing-skills
-description: Use when creating new skills, editing existing skills, or verifying skills work before deployment
+description: 创建新技能、编辑现有技能、或部署前验证技能工作时使用
 ---
 
 # 编写技能
@@ -105,7 +105,7 @@ skills/
 ```markdown
 ---
 name: Skill-Name-With-Hyphens
-description: Use when [specific triggering conditions and symptoms]
+description: [特定触发条件和症状]时使用
 ---
 
 # Skill Name
@@ -159,16 +159,16 @@ description: Use when [specific triggering conditions and symptoms]
 
 ```yaml
 # ❌ 坏：总结工作流 - Claude 可能遵循这个而非读取技能
-description: Use when executing plans - dispatches subagent per task with code review between tasks
+description: 执行计划时使用 — 每个任务派发子代理，任务间有代码审查
 
 # ❌ 坏：太多过程细节
-description: Use for TDD - write test first, watch it fail, write minimal code, refactor
+description: TDD时使用 — 先写测试，看它失败，写最小代码，重构
 
 # ✅ 好：只有触发条件，无工作流总结
-description: Use when executing implementation plans with independent tasks in the current session
+description: 在当前会话中执行带有独立任务的实施计划时使用
 
 # ✅ 好：只有触发条件
-description: Use when implementing any feature or bugfix, before writing implementation code
+description: 实现任何功能或bugfix时使用，在编写实现代码前
 ```
 
 **内容：**
@@ -181,19 +181,19 @@ description: Use when implementing any feature or bugfix, before writing impleme
 
 ```yaml
 # ❌ 坏：太抽象、模糊、不包括何时使用
-description: For async testing
+description: 用于异步测试
 
 # ❌ 坏：第一人称
-description: I can help you with async tests when they're flaky
+description: 我可以在异步测试不稳定时帮助你
 
 # ❌ 坏：提及技术但技能不特定于它
-description: Use when tests use setTimeout/sleep and are flaky
+description: 测试使用 setTimeout/sleep 且不稳定时使用
 
 # ✅ 好：以"Use when"开始，描述问题，无工作流
-description: Use when tests have race conditions, timing dependencies, or pass/fail inconsistently
+description: 测试有竞态条件、时序依赖、或不一致通过/失败时使用
 
 # ✅ 好：技术特定技能带明确触发器
-description: Use when using React Router and handling authentication redirects
+description: 使用 React Router 并处理认证重定向时使用
 ```
 
 ### 2. 关键词覆盖
@@ -527,7 +527,7 @@ Write code before test? Delete it. Start over.
 添加到描述：你即将违反规则的症状：
 
 ```yaml
-description: use when implementing any feature or bugfix, before writing implementation code
+description: 实现任何功能或bugfix时使用，在编写实现代码前
 ```
 
 ## 技能的 RED-GREEN-REFACTOR

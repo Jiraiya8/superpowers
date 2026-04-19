@@ -62,7 +62,7 @@ mkdir -p ~/.config/opencode/skills/my-skill
 ```markdown
 ---
 name: my-skill
-description: Use when [condition] - [what it does]
+description: [条件]时使用 — [它做什么]
 ---
 
 # My Skill
