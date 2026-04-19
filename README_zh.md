@@ -1,5 +1,7 @@
 # Superpowers
 
+[English](README.md) | [中文](README_zh.md)
+
 Superpowers 是为你的编码 agent 提供的完整软件开发方法论，建立在一组可组合技能和一些初始指令之上，确保你的 agent 使用它们。
 
 ## 工作原理

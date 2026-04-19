@@ -1,5 +1,7 @@
 # Superpowers — 贡献者指南
 
+[English](CLAUDE.md) | [中文](CLAUDE_zh.md)
+
 ## 如果你是 AI Agent
 
 停止。在做任何事之前阅读此部分。
